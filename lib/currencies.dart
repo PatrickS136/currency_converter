@@ -185,7 +185,7 @@ class CurrencyData {
     });
     Response response = await get(uri);
     if (response.statusCode == 200) {
-      return jsonDecode(response.body)[query].toString();
+      return jsonDecode(response.body)[query].toStringAsFixed(2);
     } else {
       throw "Problem with the API get request";
     }

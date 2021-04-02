@@ -10,7 +10,12 @@ class CurrencyDropdown extends StatelessWidget {
     final List<DropdownMenuItem<String>> dropdownItems = [];
     for (String currency in currencies) {
       var newItem = DropdownMenuItem(
-        child: Text(currency),
+        child: Text(
+          currency,
+          style: TextStyle(
+            fontFamily: "Oswald",
+          ),
+        ),
         value: currency,
       );
       dropdownItems.add(newItem);

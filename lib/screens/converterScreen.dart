@@ -1,3 +1,4 @@
+import 'package:currency_converter/constants.dart';
 import 'package:currency_converter/currencies.dart';
 import 'package:currency_converter/screens/converterCard.dart';
 import 'package:flutter/material.dart';
@@ -43,23 +44,47 @@ class _ConverterScreenState extends State<ConverterScreen> {
     converting = false;
   }
 
+  void swap() {
+    setState(() {
+      String temp = selectedBaseCurrency;
+      selectedBaseCurrency = selectedConvertedCurrency;
+      selectedConvertedCurrency = temp;
+      getData();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
           child: ConverterCard(
-              amount: "1",
-              type: "Base",
-              selected: selectedBaseCurrency,
-              callback: baseCallback),
+            amount: "1",
+            type: "Base",
+            selected: selectedBaseCurrency,
+            callback: baseCallback,
+            color1: red,
+            color2: lightRed,
+            textStyle: kConverterTextStyle,
+          ),
         ),
         Expanded(
           child: ConverterCard(
-              amount: (converting == true) ? "Converting..." : convertedAmount,
-              type: "Converted to",
-              selected: selectedConvertedCurrency,
-              callback: convertedCallback),
+            amount: (converting == true) ? "Converting..." : convertedAmount,
+            type: "Converted to",
+            selected: selectedConvertedCurrency,
+            callback: convertedCallback,
+            color1: blue,
+            color2: lightBlue,
+            textStyle: kConverterTextStyle,
+          ),
+        ),
+        TextButton(
+          onPressed: swap,
+          child: Text(
+            "SWAP",
+            style: kSwapTextStyle,
+          ),
         ),
       ],
     );
